@@ -9,7 +9,9 @@ The user has slash commands and skills installed but does not remember their nam
 
 ## 1. Spot the moment
 
-Check the situation against [references/situation-map.md](references/situation-map.md). Only suggest at a clear workflow moment — not for quick questions, one-line edits, or pure conversation.
+Check the situation against [references/situation-map.md](references/situation-map.md). A moment listed there always counts, even when the fix looks small. Don't suggest for quick knowledge questions, a one-line edit the user asked for, or pure conversation.
+
+**Order matters:** when a moment counts, make the offer (step 3) *before* you read files, investigate or edit. You can keep helping after the offer, but don't do the command's job yourself before the user has answered.
 
 ## 2. Find real candidates
 
@@ -26,6 +28,7 @@ Use `AskUserQuestion` with one question:
 - **Question:** what you noticed + the suggestion, in the user's language. e.g. "The build failed — run `/build-fix`?"
 - **Options (2–4):** the recommended command first, labelled "(Recommended)"; up to two alternatives; and **always a last "Skip" option**, so the question is valid even with a single candidate. Each option's description says in one line what the command will do.
 - Mention side effects in the description when a command commits, pushes, deletes code, or deploys.
+- **No `AskUserQuestion` tool** (headless `-p` runs, some hosts): make the same offer as one line of text before anything else in your reply, e.g. "Build failed. Want me to run `/build-fix`? (yes / skip)". Then go on helping, but don't run the command.
 
 ## 4. Act on the answer
 
