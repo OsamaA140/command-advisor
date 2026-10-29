@@ -1,6 +1,6 @@
 ---
 description: A failing build is a clear workflow moment. The advisor should fire and offer a fix through a question, not run anything on its own.
-expected_outcome: command-advisor is invoked and the reply asks the user (via AskUserQuestion) whether to run a build-fixing command, with a Skip option.
+expected_outcome: command-advisor is invoked. If a build-fixing command is installed, the reply offers it through AskUserQuestion with a Skip option; if none is installed, it says so and doesn't invent one. Nothing runs without a yes.
 max_turns: 10
 allowed_tools: [Read, Glob, Grep, Skill, AskUserQuestion]
 ---

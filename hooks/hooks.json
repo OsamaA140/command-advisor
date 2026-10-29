@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'command-advisor plugin: when a workflow moment comes up (build or type check fails, code was just written, tests are missing, about to commit, open a PR or deploy, a new feature is requested, a tricky bug was solved) or the user asks which commands they have or which to use, invoke the Skill command-advisor:command-advisor FIRST, before investigating or answering. It offers a matching installed command through a question card and runs nothing without the user saying yes. Skip it for quick questions and one-line edits.'"
+          }
+        ]
+      }
+    ]
+  }
+}
