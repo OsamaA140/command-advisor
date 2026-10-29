@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'command-advisor is installed: at workflow moments (build or type check fails, code just written, tests missing, about to commit, open a PR or deploy, new feature requested, tricky bug solved) the command-advisor:command-advisor skill offers a matching installed command through a question card and runs nothing without a yes. It does not apply to quick questions or one-line edits.'"
+          }
+        ]
+      }
+    ]
+  }
+}

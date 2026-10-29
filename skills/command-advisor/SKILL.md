@@ -1,6 +1,6 @@
 ---
 name: command-advisor
-description: Suggests the right installed slash command or skill at the right moment and asks before running it, so the user never has to remember command names. Use at natural workflow moments — a new feature or change is requested, a build or type check fails, code was just written, tests or coverage are missing, the user is about to commit, open a PR or deploy, a page is slow, or a tricky bug was just solved. Also use when the user asks "which command should I use", "what commands do I have", or seems unsure how to proceed.
+description: Use when a build or type check fails, code was just written, tests are missing, the user is about to commit, open a PR or deploy, a new feature is requested, or a tricky bug was solved — offers the matching installed slash command or skill and asks before running it. Also use for "which command should I use" or "what commands do I have".
 ---
 
 # Command Advisor
@@ -13,8 +13,9 @@ Check the situation against [references/situation-map.md](references/situation-m
 
 ## 2. Find real candidates
 
-- Pick only from commands and skills **actually listed in this session** (the available-skills list). Never invent a name or suggest one that isn't installed.
-- Match by each command's `description` against the moment. Prefer the most specific match.
+- Pick only from commands, skills and agents (subagent types) **actually listed in this session**. Never invent a name or suggest one that isn't installed.
+- Match by each command's `description` against the moment. Prefer the most specific match. When a long list shows a command by name only, match on the name, and in the option say you're going by the name.
+- If nothing installed fits, don't ask. Carry on, or say in one line that no installed command covers this.
 - When a plugin and the user's own command both fit (e.g. two `plan` commands), offer both as options and use the namespaced form (`plugin:command`) so the right one runs.
 - Pick at most 3 candidates.
 
@@ -28,14 +29,15 @@ Use `AskUserQuestion` with one question:
 
 ## 4. Act on the answer
 
-- **Yes / picks one:** invoke it with the `Skill` tool, passing any obvious argument (feature name, file, etc.).
+- **Yes / picks one:** invoke it, using the `Skill` tool for a command or skill and the `Agent` tool for an agent. Pass any obvious argument (feature name, file, etc.).
 - **Skip:** carry on normally. Don't suggest that same command again this session unless the user asks.
 
 ## Guardrails
 
-- **Ask first, always.** Even when a command's own description says "use when…", don't invoke it on your own — that description tells you *when to offer it*, not permission to run it. The only exception is a command the user typed themselves.
+- **Ask first, by default.** Even when a command's own description says "use when…", don't invoke it on your own. That description tells you *when to offer it*; it doesn't give permission to run it.
+- **The user's own rules come first.** When the user's CLAUDE.md or rule files say to run something without asking (e.g. "run the code-reviewer agent after writing code"), follow that rule and don't ask about it. Order of precedence: the user's explicit rules > this ask-first default > a command's own "use when". A command the user typed themselves just runs.
 - One suggestion per moment; never stack questions.
 - If the user already typed a slash command, just run it — don't second-guess.
 - Don't interrupt a command that is already running to suggest another.
 - If the user says "stop suggesting commands", stop for the rest of the session.
-- When the user asks "what commands do I have?", list the installed ones grouped by workflow phase (plan → build → test → review → ship) with one line each, instead of asking.
+- When the user asks "what commands do I have?", list them instead of asking, the same way `/command-advisor:commands` does: phases plan → build → test → review → ship → other. By default show only plan → ship, and collapse "other" into one `+N more from: …` line.

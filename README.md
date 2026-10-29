@@ -6,7 +6,7 @@ Stop memorizing slash commands. Command Advisor watches for natural workflow mom
 
 ## What's inside
 - **Skill `command-advisor`** — matches the moment to your installed commands/skills and asks via a question card.
-- **Command `/command-advisor:commands`** — lists everything you have, grouped by phase, and suggests what fits now.
+- **Command `/command-advisor:commands`**: lists your dev-workflow commands by phase (plan → build → test → review → ship → other) and suggests what fits now. Pass `all`, a phase (`review`), or a plugin name to change the scope.
 
 Works with any commands you have: your own `~/.claude/commands`, and plugins like agent-skills or everything-claude-code. It never invents commands that aren't installed.
 
