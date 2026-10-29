@@ -1,0 +1,15 @@
+{
+  "name": "command-advisor",
+  "owner": { "name": "Osama" },
+  "description": "Command Advisor: the right slash command, suggested at the right moment.",
+  "plugins": [
+    {
+      "name": "command-advisor",
+      "source": "./",
+      "version": "0.1.0",
+      "description": "Suggests the right installed slash command or skill at the right moment and asks before running it.",
+      "license": "MIT",
+      "keywords": ["commands", "skills", "workflow", "productivity"]
+    }
+  ]
+}
