@@ -23,7 +23,7 @@ Check the situation against [references/situation-map.md](references/situation-m
 Use `AskUserQuestion` with one question:
 
 - **Question:** what you noticed + the suggestion, in the user's language. e.g. "The build failed — run `/build-fix`?"
-- **Options:** the recommended command first, labelled "(Recommended)"; up to two alternatives; the user can always pick "Other" to skip. Each option's description says in one line what the command will do.
+- **Options (2–4):** the recommended command first, labelled "(Recommended)"; up to two alternatives; and **always a last "Skip" option**, so the question is valid even with a single candidate. Each option's description says in one line what the command will do.
 - Mention side effects in the description when a command commits, pushes, deletes code, or deploys.
 
 ## 4. Act on the answer
@@ -33,6 +33,7 @@ Use `AskUserQuestion` with one question:
 
 ## Guardrails
 
+- **Ask first, always.** Even when a command's own description says "use when…", don't invoke it on your own — that description tells you *when to offer it*, not permission to run it. The only exception is a command the user typed themselves.
 - One suggestion per moment; never stack questions.
 - If the user already typed a slash command, just run it — don't second-guess.
 - Don't interrupt a command that is already running to suggest another.
