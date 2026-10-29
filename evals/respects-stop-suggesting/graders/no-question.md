@@ -1,5 +1,7 @@
 ---
 type: tool_used
 tool: AskUserQuestion
-arm: with-only
+min: 0
+max: 0
+arm: both
 ---
